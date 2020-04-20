@@ -10,5 +10,10 @@
 .DS_Store
 /build
 /captures
+/apks
+/gradlew
+/gradlew.bat
+/app/src/test
+/app/src/androidTest
 .externalNativeBuild
 .cxx
