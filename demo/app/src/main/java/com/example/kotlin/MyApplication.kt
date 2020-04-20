@@ -59,7 +59,7 @@ class MyApplication:Application(){
         })
     }
 
-    val mActivityLifecycleCallbacks = object: ActivityLifecycleCallbacks{
+    private val mActivityLifecycleCallbacks = object: ActivityLifecycleCallbacks{
         override fun onActivityCreated(p0: Activity?, p1: Bundle?) {
             Logger.d(TAG,"onCreated: " +p0?.componentName?.className)
         }

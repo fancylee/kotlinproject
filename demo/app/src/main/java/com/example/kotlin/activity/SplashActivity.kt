@@ -29,6 +29,10 @@ class SplashActivity : BaseActivity(){
         descTypeFace = Typeface.createFromAsset(MyApplication.context.assets, "fonts/FZLanTingHeiS-L-GB-Regular.TTF")
     }
 
+    override fun start() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun layoutId(): Int {
 
         return R.layout.activity_splash
