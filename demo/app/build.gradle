@@ -1,0 +1,167 @@
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+
+
+//    flavorDimensions "free","pro"
+//    productFlavors {
+//        free {
+//            flavorDimension ".free"
+//        }
+//        pro {
+//            flavorDimension ".pro"
+//        }
+//    }
+
+
+//    flavorDimensions "default"
+
+//    productFlavors {
+//        free {
+//            dimension "default"
+//            applicationIdSuffix ".free"
+//        }
+//        pro {
+//            dimension "default"
+//            applicationIdSuffix ".pro"
+//        }
+//    }
+    productFlavors {
+//        free {
+//            dimension "default"
+//        }
+//        pro {
+//            dimension "default"
+//        }
+//        free1 {
+//            dimension "default"
+//        }
+//    }
+//    productFlavors.all{
+//        flavor ->flavor.applicationIdSuffix = name
+    }
+    //签名配置
+    signingConfigs{
+        config{
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['keyPassword']
+            v1SigningEnabled true
+            v2SigningEnabled true
+
+        }
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            def buildType =  variant.buildType.name
+
+
+            def createTime = new Date().format("YYYY-MM-dd_HH-mm-ss", TimeZone.getTimeZone("GMT+08:00"))
+
+            variant.outputs.all{
+//                print("11111${isModule}2222")
+                if (buildType == "release"){
+                    variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/apks/")
+                   def fileName = "kotlindemo_v${variant.versionName}_${createTime}_${buildType}.apk"
+//                    print("2222$fileName")
+                    it.outputFileName = fileName
+                }else{
+                    it.outputFileName = "kotlindemo_v${variant.versionName}_${createTime}_${buildType}.apk"
+//                    print("3333$it.outputFileName")
+                }
+            }
+
+    }
+
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.config
+            buildConfigField('String','hello','"Hello"')
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            zipAlignEnabled true
+            buildConfigField('String','hello','"HelloWorld"')
+
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation rootProject.ext.supportLibs
+    // 网络请求库
+    implementation rootProject.ext.networkLibs
+    // RxJava2
+    implementation rootProject.ext.rxJavaLibs
+    implementation rootProject.ext.otherLibs
+
+    //leakCanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+    //Logger
+    implementation 'com.orhanobut:logger:2.1.1'
+
+    //运行时权限
+    implementation'pub.devrel:easypermissions:1.2.0'
+    //模糊透明 View
+    implementation 'com.github.mmin18:realtimeblurview:1.1.0'
+
+    //Google开源的一个布局控件
+    implementation 'com.google.android:flexbox:0.3.1'
+
+    // 底部菜单
+    implementation('com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar') {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+
+    //smartRefreshLayout 下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
+    //Banner
+    implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
+
+    implementation 'com.classic.common:multiple-status-view:1.7'
+
+
+
+}
