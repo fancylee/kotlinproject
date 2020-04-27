@@ -3,7 +3,7 @@ package com.example.kotlin.fragment
 import android.os.Bundle
 import com.example.kotlin.base.BaseFragment
 
-class MineFragment :BaseFragment() {
+class MineFragment : BaseFragment() {
 
     private var mTitle: String? = null
 

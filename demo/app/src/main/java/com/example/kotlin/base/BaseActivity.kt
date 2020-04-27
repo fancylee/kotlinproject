@@ -32,6 +32,8 @@ abstract class BaseActivity :AppCompatActivity(),EasyPermissions.PermissionCallb
         initView()
         initData()
 
+        start()
+        initListener()
     }
 
     /**

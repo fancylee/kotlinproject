@@ -1,51 +1,61 @@
 package com.example.kotlin.base
 
 import android.os.Bundle
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.classic.common.MultipleStatusView
 import com.example.kotlin.MyApplication
-import com.example.kotlin.fragment.HomeFragment
 import io.reactivex.annotations.NonNull
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
-abstract class BaseFragment :Fragment(),EasyPermissions.PermissionCallbacks {
+/**
+ * @author Xuhao
+ * created: 2017/10/25
+ * desc:
+ */
+
+ abstract class BaseFragment: Fragment(),EasyPermissions.PermissionCallbacks{
 
     /**
      * 视图是否加载完毕
      */
     private var isViewPrepare = false
-
+    /**
+     * 数据是否加载过了
+     */
     private var hasLoadData = false
+    /**
+     * 多种状态的 View 的切换
+     */
+    protected var mLayoutStatusView: MultipleStatusView? = null
 
-
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(getLayoutId(),null)
     }
 
 
+
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if(isVisibleToUser){
+        if (isVisibleToUser) {
             lazyLoadDataIfPrepared()
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isViewPrepare = true
         initView()
+        lazyLoadDataIfPrepared()
+        //多种状态切换的view 重试点击事件
+        mLayoutStatusView?.setOnClickListener(mRetryClickListener)
     }
 
     private fun lazyLoadDataIfPrepared() {
@@ -55,9 +65,15 @@ abstract class BaseFragment :Fragment(),EasyPermissions.PermissionCallbacks {
         }
     }
 
+    open val mRetryClickListener: View.OnClickListener = View.OnClickListener {
+        lazyLoad()
+    }
+
+
     /**
      * 加载布局
      */
+    @LayoutRes
     abstract fun getLayoutId():Int
 
     /**
@@ -70,11 +86,11 @@ abstract class BaseFragment :Fragment(),EasyPermissions.PermissionCallbacks {
      */
     abstract fun lazyLoad()
 
-
     override fun onDestroy() {
         super.onDestroy()
         activity?.let { MyApplication.getRefWatcher(it)?.watch(activity) }
     }
+
 
     /**
      * 重写要申请权限的Activity或者Fragment的onRequestPermissionsResult()方法，
@@ -117,11 +133,12 @@ abstract class BaseFragment :Fragment(),EasyPermissions.PermissionCallbacks {
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             Toast.makeText(activity, "已拒绝权限" + sb + "并不再询问", Toast.LENGTH_SHORT).show()
             AppSettingsDialog.Builder(this)
-                .setRationale("此功能需要" + sb + "权限，否则无法正常使用，是否打开设置")
-                .setPositiveButton("好")
-                .setNegativeButton("不行")
-                .build()
-                .show()
+                    .setRationale("此功能需要" + sb + "权限，否则无法正常使用，是否打开设置")
+                    .setPositiveButton("好")
+                    .setNegativeButton("不行")
+                    .build()
+                    .show()
         }
     }
+
 }

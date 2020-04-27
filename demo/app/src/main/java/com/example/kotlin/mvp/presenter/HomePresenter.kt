@@ -32,6 +32,7 @@ class HomePresenter :BasePresenter<HomeContract.View>(),HomeContract.Presenter {
                 bannerItemList.filter { item ->
                     item.type=="banner2"|| item.type=="horizontalScrollCard"
                 }.forEach { it-> bannerItemList.remove(it) }
+                t.issueList.get(0).count = bannerItemList.size
 
                 bannerHomeBean = t //记录第一页是当做 banner 数据
                 homeModel.loadMoreData(t.nextPageUrl)

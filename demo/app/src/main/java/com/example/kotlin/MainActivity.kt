@@ -12,6 +12,7 @@ import com.example.kotlin.fragment.MineFragment
 import com.example.kotlin.mvp.model.bean.TabEntity
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -45,6 +46,7 @@ class MainActivity : BaseActivity() {
         initTab()
         tab_layout.currentTab = mIndex
         switchFragment(mIndex)
+//        Logger.d("111111111111111111")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -108,6 +110,9 @@ class MainActivity : BaseActivity() {
 
             }
         }
+        mIndex = position
+        tab_layout.currentTab = mIndex
+        transaction.commitAllowingStateLoss()
 
 
     }

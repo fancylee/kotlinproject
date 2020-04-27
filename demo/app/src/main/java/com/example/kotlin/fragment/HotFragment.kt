@@ -1,9 +1,10 @@
 package com.example.kotlin.fragment
 
 import android.os.Bundle
+import com.example.kotlin.R
 import com.example.kotlin.base.BaseFragment
 
-class HotFragment :BaseFragment() {
+class HotFragment : BaseFragment() {
 
 
 
@@ -19,7 +20,7 @@ class HotFragment :BaseFragment() {
         }
     }
     override fun getLayoutId(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       return  R.layout.fragment_hot
     }
 
     override fun initView() {
