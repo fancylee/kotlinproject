@@ -182,7 +182,7 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
 
     // 视屏播放器
-    implementation 'com.shuyu:GSYVideoPlayer:7.1.2'
+    implementation 'com.shuyu:GSYVideoPlayer:2.1.1'
     implementation 'com.android.support:multidex:1.0.3'
 
 

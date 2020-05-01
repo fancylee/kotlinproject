@@ -1,7 +1,7 @@
 package com.example.kotlin.net
 
 import com.example.kotlin.MyApplication
-import com.example.kotlin.activity.ApiService
+import com.example.kotlin.api.ApiService
 import com.example.kotlin.api.UrlConstant
 import com.example.kotlin.utils.AppUtils
 import com.example.kotlin.utils.NetworkUtil
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 object RetrofitManager {
 
 
-    val service:ApiService by lazy(LazyThreadSafetyMode.SYNCHRONIZED){
+    val service: ApiService by lazy(LazyThreadSafetyMode.SYNCHRONIZED){
             getRetrofit().create(ApiService::class.java)
     }
 

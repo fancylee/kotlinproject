@@ -1,6 +1,7 @@
-package com.example.kotlin.activity
+package com.example.kotlin.api
 
 import com.example.kotlin.model.bean.HomeBean
+import com.example.kotlin.mvp.model.bean.CategoryBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -20,17 +21,17 @@ interface ApiService {
     @GET
     fun getMoreHomeData(@Url url: String): Observable<HomeBean>
 //
-//    /**
-//     * 根据item id获取相关视频
-//     */
-//    @GET("v4/video/related?")
-//    fun getRelatedData(@Query("id") id: Long): Observable<HomeBean.Issue>
-//
-//    /**
-//     * 获取分类
-//     */
-//    @GET("v4/categories")
-//    fun getCategory(): Observable<ArrayList<CategoryBean>>
+    /**
+     * 根据item id获取相关视频
+     */
+    @GET("v4/video/related?")
+    fun getRelatedData(@Query("id") id: Long): Observable<HomeBean.Issue>
+
+    /**
+     * 获取分类
+     */
+    @GET("v4/categories")
+    fun getCategory(): Observable<ArrayList<CategoryBean>>
 //
 //    /**
 //     * 获取分类详情List
