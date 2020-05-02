@@ -46,7 +46,7 @@ class CategoryFragment :BaseFragment(),CategoryContract.View {
 
         mRecyclerView.adapter = mAdapter
         mRecyclerView.layoutManager = GridLayoutManager(activity,2)
-        
+
         mRecyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,

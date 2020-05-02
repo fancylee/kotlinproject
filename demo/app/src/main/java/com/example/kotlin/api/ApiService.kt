@@ -1,6 +1,7 @@
 package com.example.kotlin.api
 
 import com.example.kotlin.model.bean.HomeBean
+import com.example.kotlin.mvp.model.bean.AuthorInfoBean
 import com.example.kotlin.mvp.model.bean.CategoryBean
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -62,17 +63,17 @@ interface ApiService {
      */
     @GET("v3/queries/hot")
     fun getHotWord(): Observable<ArrayList<String>>
-//
-//    /**
-//     * 关注
-//     */
-//    @GET("v4/tabs/follow")
-//    fun getFollowInfo(): Observable<HomeBean.Issue>
-//
-//    /**
-//     * 作者信息
-//     */
-//    @GET("v4/pgcs/detail/tab?")
-//    fun getAuthorInfo(@Query("id") id: Long): Observable<AuthorInfoBean>
+
+    /**
+     * 关注
+     */
+    @GET("v4/tabs/follow")
+    fun getFollowInfo(): Observable<HomeBean.Issue>
+
+    /**
+     * 作者信息
+     */
+    @GET("v4/pgcs/detail/tab?")
+    fun getAuthorInfo(@Query("id") id: Long): Observable<AuthorInfoBean>
 
 }
