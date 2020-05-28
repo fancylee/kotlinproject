@@ -34,8 +34,8 @@ object TabLayoutHelper{
                 child.setPadding(0, 0, 0, 0)
                 val params = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    params.marginStart = DisplayManager.dip2px(50f)!!
-                    params.marginEnd = DisplayManager.dip2px(50f)!!
+                    params.marginStart = DisplayManager.dip2px(20f)!!
+                    params.marginEnd = DisplayManager.dip2px(20f)!!
                 }
                 child.layoutParams = params
                 child.invalidate()

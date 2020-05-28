@@ -3,6 +3,7 @@ package com.example.kotlin.api
 import com.example.kotlin.model.bean.HomeBean
 import com.example.kotlin.mvp.model.bean.AuthorInfoBean
 import com.example.kotlin.mvp.model.bean.CategoryBean
+import com.example.kotlin.mvp.model.bean.TabInfoBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -45,13 +46,13 @@ interface ApiService {
      */
     @GET
     fun getIssueData(@Url url: String): Observable<HomeBean.Issue>
-//
-//    /**
-//     * 获取全部排行榜的Info（包括，title 和 Url）
-//     */
-//    @GET("v4/rankList")
-//    fun getRankList(): Observable<TabInfoBean>
-//
+
+    /**
+     * 获取全部排行榜的Info（包括，title 和 Url）
+     */
+    @GET("v4/rankList")
+    fun getRankList(): Observable<TabInfoBean>
+
     /**
      * 获取搜索信息
      */
