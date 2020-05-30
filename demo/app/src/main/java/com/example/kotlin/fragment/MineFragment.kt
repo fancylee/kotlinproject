@@ -1,6 +1,7 @@
 package com.example.kotlin.fragment
 
 import android.os.Bundle
+import com.example.kotlin.R
 import com.example.kotlin.base.BaseFragment
 
 class MineFragment : BaseFragment() {
@@ -16,15 +17,11 @@ class MineFragment : BaseFragment() {
             return fragment
         }
     }
-    override fun getLayoutId(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getLayoutId(): Int  = R.layout.fragment_mine
 
     override fun initView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun lazyLoad() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

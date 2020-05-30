@@ -14,6 +14,7 @@
     app:noNetworkView="@layout/layout_network_view"
     >
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecyclerView"
         tools:listitem="@layout/item_category_detail"
         android:paddingBottom="51dp"
         android:clipToPadding="false"

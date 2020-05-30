@@ -34,9 +34,9 @@
         android:layout_height="40dp"
         android:background="@color/color_title_bg"
         app:tabMinWidth="100dp"
-        app:tabIndicatorColor="#000"
+        app:tabIndicatorColor="#f00"
         app:tabIndicatorHeight="2dp"
-        app:tabSelectedTextColor="#000"
+        app:tabSelectedTextColor="#f00"
         app:tabTextColor="#5000"/>
 
     <View
